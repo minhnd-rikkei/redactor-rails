@@ -7910,7 +7910,10 @@ REDACTOR = {version: "10.2.5",  instances: {}, params: {}};
 						this.selection.setMarker(this.range, node2, false);
 
             // Fix for Chrome58 Issues
-            if (this.utils.browser('chrome')) {
+            if (
+              this.utils.browser('chrome') ||
+              this.selection.getText()?.trim()?.replace(/(^[\s\u200b]*|[\s\u200b]*$)/g, '') === ''
+            ) {
               this.caret.set(node1, 0, node2, 0);
             }
             // End Chrome58 Issues
